@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:converters="clr-namespace:CakeTime.Converters"
+             xmlns:viewmodels="clr-namespace:CakeTime.ViewModels"
+             x:DataType="viewmodels:EventsListViewModel"
+             x:Class="CakeTime.Pages.EventsListPage"
+             Title="EventsListPage"
+             Shell.BackgroundColor="#8FB4D7"
+             Shell.FlyoutBehavior="Disabled">
+    <ContentPage.Resources>
+        <converters:BoolToVisibleOrHiddenConverter x:Key="BooleanToVisibilityConverter"/>
+    </ContentPage.Resources>
+
+    <Grid RowDefinitions="*, Auto">
+        <ScrollView
+                Grid.Row="0"
+                BackgroundColor="#C3FDBD"
+                IsVisible="{Binding IsEventsEmpty, Converter={StaticResource BooleanToVisibilityConverter}}">
+            <VerticalStackLayout
+                    Padding="30,0"
+                    Spacing="25">
+                <Image
+                    Source="cake.svg"
+                    HeightRequest="185"
+                    Aspect="AspectFit"
+                    SemanticProperties.Description="cake" />
+
+                <Label
+                    Text="Hello, World! 1"
+                    Style="{StaticResource Headline}"
+                    SemanticProperties.HeadingLevel="Level1" />
+            </VerticalStackLayout>
+        </ScrollView>
+        <ScrollView
+                Grid.Row="0"
+                BackgroundColor="#C3FDBD"
+                IsVisible="{Binding HasAnyEvents, Converter={StaticResource BooleanToVisibilityConverter}}">
+            <VerticalStackLayout
+                    Padding="30,0"
+                    Spacing="25">
+                <Image
+                    Source="cake.svg"
+                    HeightRequest="185"
+                    Aspect="AspectFit"
+                    SemanticProperties.Description="cake" />
+
+                <Label
+                    Text="Hello, World! 2"
+                    Style="{StaticResource Headline}"
+                    SemanticProperties.HeadingLevel="Level1" />
+            </VerticalStackLayout>
+        </ScrollView>
+        <FlexLayout
+                Grid.Row="1"
+                Direction="Row"
+                JustifyContent="SpaceAround"
+                AlignItems="Center"
+                BackgroundColor="#8FB4D7"
+                HeightRequest="60">
+            <Image Source="events_list_icon.svg" />
+            <Image Source="calendar_icon.svg" />
+            <Image Source="settings_icon.svg" />
+        </FlexLayout>
+    </Grid>
+</ContentPage>

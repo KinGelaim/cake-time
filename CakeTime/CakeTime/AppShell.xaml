@@ -4,10 +4,19 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:CakeTime"
+    xmlns:pages="clr-namespace:CakeTime.Pages"
+    xmlns:drawable="clr-namespace:CakeTime.Drawable"
     Title="Cake Time!">
 
+    <Shell.TitleView>
+        <Grid>
+            <Label
+                Text="Cake Time!" 
+                FontSize="36"/>
+        </Grid>
+    </Shell.TitleView>
+
     <ShellContent
-        Title="Cake Time!"
-        ContentTemplate="{DataTemplate local:MainPage}"
-        Route="MainPage" />
+        ContentTemplate="{DataTemplate pages:EventsListPage}"
+        Route="EventsListPage" />
 </Shell>

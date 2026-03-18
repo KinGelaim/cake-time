@@ -8,11 +8,27 @@
     xmlns:drawable="clr-namespace:CakeTime.Drawable"
     Title="Cake Time!">
 
+    <Shell.Resources>
+        <drawable:TextOutlineDrawable
+            x:Key="TitleTextDrawable"
+            Text="Cake Time!"
+            FontSize="38"
+            TextColor="#FF8E58"
+            OutlineColor="#000000"
+            OutlineThickness="1.4" />
+    </Shell.Resources>
+
     <Shell.TitleView>
         <Grid>
-            <Label
-                Text="Cake Time!" 
-                FontSize="36"/>
+            <GraphicsView
+                Drawable="{StaticResource TitleTextDrawable}"
+                HorizontalOptions="Center"
+                VerticalOptions="Center" />
+            <Image
+                Source="cake_icon.svg"
+                HorizontalOptions="End"
+                VerticalOptions="Center"
+                Margin="0,5,5,0"/>
         </Grid>
     </Shell.TitleView>
 

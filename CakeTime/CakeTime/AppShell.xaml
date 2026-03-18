@@ -5,32 +5,8 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:CakeTime"
     xmlns:pages="clr-namespace:CakeTime.Pages"
-    xmlns:drawable="clr-namespace:CakeTime.Drawable"
-    Title="Cake Time!">
-
-    <Shell.Resources>
-        <drawable:TextOutlineDrawable
-            x:Key="TitleTextDrawable"
-            Text="Cake Time!"
-            FontSize="38"
-            TextColor="#FF8E58"
-            OutlineColor="#000000"
-            OutlineThickness="1.4" />
-    </Shell.Resources>
-
-    <Shell.TitleView>
-        <Grid>
-            <GraphicsView
-                Drawable="{StaticResource TitleTextDrawable}"
-                HorizontalOptions="Center"
-                VerticalOptions="Center" />
-            <Image
-                Source="cake_icon.svg"
-                HorizontalOptions="End"
-                VerticalOptions="Center"
-                Margin="0,5,5,0"/>
-        </Grid>
-    </Shell.TitleView>
+    Shell.NavBarIsVisible="False"
+    Shell.TabBarIsVisible="False">
 
     <ShellContent
         ContentTemplate="{DataTemplate pages:EventsListPage}"

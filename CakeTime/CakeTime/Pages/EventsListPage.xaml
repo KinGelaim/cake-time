@@ -3,18 +3,67 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:converters="clr-namespace:CakeTime.Converters"
              xmlns:viewmodels="clr-namespace:CakeTime.ViewModels"
+             xmlns:drawable="clr-namespace:CakeTime.Drawable"
              x:DataType="viewmodels:EventsListViewModel"
              x:Class="CakeTime.Pages.EventsListPage"
-             Title="EventsListPage"
-             Shell.BackgroundColor="#8FB4D7"
-             Shell.FlyoutBehavior="Disabled">
+             Title="EventsListPage">
     <ContentPage.Resources>
         <converters:BoolToVisibleOrHiddenConverter x:Key="BooleanToVisibilityConverter"/>
+        <drawable:TextOutlineDrawable
+            x:Key="TitleTextDrawable"
+            Text="Cake Time!"
+            FontSize="38"
+            TextColor="#FF8E58"
+            OutlineColor="#000000"
+            OutlineThickness="1.4" />
     </ContentPage.Resources>
 
-    <Grid RowDefinitions="*, Auto">
-        <ScrollView
+    <ContentPage.Background>
+        <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
+            <GradientStop Color="#9FF5E4" Offset="0.0144" />
+            <GradientStop Color="#C9F6AC" Offset="0.6309" />
+            <GradientStop Color="#C8F7AA" Offset="0.6416" />
+        </LinearGradientBrush>
+    </ContentPage.Background>
+
+    <Grid RowDefinitions="Auto, *, Auto">
+        <Grid
                 Grid.Row="0"
+                RowDefinitions="Auto, *">
+            <Grid.Background>
+                <LinearGradientBrush StartPoint="0.23,0.65" EndPoint="0.75,0.35">
+                    <GradientStop Color="#99FFFDFF" Offset="0.38" />
+                    <GradientStop Color="#99BFF2AD" Offset="0.66" />
+                </LinearGradientBrush>
+            </Grid.Background>
+
+            <GraphicsView
+                Drawable="{StaticResource TitleTextDrawable}"
+                HorizontalOptions="Center"
+                VerticalOptions="Center"
+                HeightRequest="50"/>
+            <Image
+                Source="cake_icon.svg"
+                HorizontalOptions="End"
+                VerticalOptions="Center"
+                Margin="0,5,5,0"/>
+            <BoxView
+                    Grid.Row="1"
+                    HeightRequest="5">
+                <BoxView.Background>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                        <GradientStop
+                            Color="#4015AC2C"
+                            Offset="0.2" />
+                        <GradientStop
+                            Color="#3043d15f"
+                            Offset="1.0" />
+                    </LinearGradientBrush>
+                </BoxView.Background>
+            </BoxView>
+        </Grid>
+        <ScrollView
+                Grid.Row="1"
                 BackgroundColor="#C3FDBD"
                 IsVisible="{Binding IsEventsEmpty, Converter={StaticResource BooleanToVisibilityConverter}}">
             <VerticalStackLayout
@@ -33,7 +82,7 @@
             </VerticalStackLayout>
         </ScrollView>
         <ScrollView
-                Grid.Row="0"
+                Grid.Row="1"
                 BackgroundColor="#C3FDBD"
                 IsVisible="{Binding HasAnyEvents, Converter={StaticResource BooleanToVisibilityConverter}}">
             <VerticalStackLayout
@@ -52,7 +101,7 @@
             </VerticalStackLayout>
         </ScrollView>
         <FlexLayout
-                Grid.Row="1"
+                Grid.Row="2"
                 Direction="Row"
                 JustifyContent="SpaceAround"
                 AlignItems="Center"

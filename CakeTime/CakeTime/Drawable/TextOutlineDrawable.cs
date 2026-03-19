@@ -47,6 +47,32 @@ internal sealed class TextOutlineDrawable : BindableObject, IDrawable
         set => SetValue(OutlineThicknessProperty, value);
     }
 
+    public static readonly BindableProperty HorizontalAlignmentProperty =
+        BindableProperty.Create(
+            nameof(HorizontalAlignment),
+            typeof(HorizontalAlignment),
+            typeof(TextOutlineDrawable),
+            HorizontalAlignment.Left);
+
+    public HorizontalAlignment HorizontalAlignment
+    {
+        get => (HorizontalAlignment)GetValue(HorizontalAlignmentProperty);
+        set => SetValue(HorizontalAlignmentProperty, value);
+    }
+
+    public static readonly BindableProperty VerticalAlignmentProperty =
+        BindableProperty.Create(
+            nameof(VerticalAlignment),
+            typeof(VerticalAlignment),
+            typeof(TextOutlineDrawable),
+            VerticalAlignment.Top);
+
+    public VerticalAlignment VerticalAlignment
+    {
+        get => (VerticalAlignment)GetValue(VerticalAlignmentProperty);
+        set => SetValue(VerticalAlignmentProperty, value);
+    }
+
     public void Draw(ICanvas canvas, RectF dirtyRect)
     {
         if (string.IsNullOrEmpty(Text))
@@ -57,8 +83,11 @@ internal sealed class TextOutlineDrawable : BindableObject, IDrawable
         canvas.Font = Microsoft.Maui.Graphics.Font.Default;
         canvas.FontSize = FontSize;
 
-        var x = dirtyRect.Center.X;
-        var y = dirtyRect.Center.Y + (FontSize / 2.2f);
+        var x = dirtyRect.Left;
+        var y = dirtyRect.Top;
+
+        var width = dirtyRect.Width;
+        var height = dirtyRect.Height;
 
         // Массив смещений для имитации обводки
         var offsets = new[]
@@ -77,11 +106,25 @@ internal sealed class TextOutlineDrawable : BindableObject, IDrawable
         canvas.FontColor = Color.FromArgb(OutlineColor);
         foreach (var offset in offsets)
         {
-            canvas.DrawString(Text, x + offset.X, y + offset.Y, HorizontalAlignment.Center);
+            canvas.DrawString(
+                Text,
+                x + offset.X,
+                y + offset.Y,
+                width,
+                height,
+                HorizontalAlignment,
+                VerticalAlignment);
         }
 
         // Рисуем заливку
         canvas.FontColor = Color.FromArgb(TextColor);
-        canvas.DrawString(Text, x, y, HorizontalAlignment.Center);
+        canvas.DrawString(
+            Text,
+            x,
+            y,
+            width,
+            height,
+            HorizontalAlignment,
+            VerticalAlignment);
     }
 }

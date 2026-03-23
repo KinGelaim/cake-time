@@ -9,6 +9,6 @@
     Shell.TabBarIsVisible="False">
 
     <ShellContent
-        ContentTemplate="{DataTemplate pages:EventsListPage}"
-        Route="EventsListPage" />
+        ContentTemplate="{DataTemplate pages:MainPage}"
+        Route="MainPage" />
 </Shell>

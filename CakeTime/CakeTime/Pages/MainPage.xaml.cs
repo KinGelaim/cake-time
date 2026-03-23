@@ -2,9 +2,9 @@ using CakeTime.ViewModels;
 
 namespace CakeTime.Pages;
 
-public partial class EventsListPage : ContentPage
+public partial class MainPage : ContentPage
 {
-	public EventsListPage(EventsListViewModel viewModel)
+	public MainPage(MainViewModel viewModel)
 	{
 		InitializeComponent();
 		BindingContext = viewModel;

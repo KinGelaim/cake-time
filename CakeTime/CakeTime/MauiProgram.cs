@@ -15,6 +15,7 @@ public static class MauiProgram
                 fonts.AddFont("DroidSansMono.ttf", "DroidSansMono");
             });
 
+        builder.Services.AddTransient<MainViewModel>();
         builder.Services.AddTransient<EventsListViewModel>();
 
 #if DEBUG

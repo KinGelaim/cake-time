@@ -4,9 +4,9 @@
              xmlns:converters="clr-namespace:CakeTime.Converters"
              xmlns:viewmodels="clr-namespace:CakeTime.ViewModels"
              xmlns:drawable="clr-namespace:CakeTime.Drawable"
-             x:DataType="viewmodels:EventsListViewModel"
-             x:Class="CakeTime.Pages.EventsListPage"
-             Title="EventsListPage">
+             x:DataType="viewmodels:MainViewModel"
+             x:Class="CakeTime.Pages.MainPage"
+             Title="MainPage">
     <ContentPage.Resources>
         <converters:BoolToVisibleOrHiddenConverter x:Key="BooleanToVisibilityConverter"/>
         <drawable:TextOutlineDrawable
@@ -17,24 +17,6 @@
             OutlineColor="#000000"
             OutlineThickness="1.4"
             HorizontalAlignment="Center"
-            VerticalAlignment="Center" />
-        <drawable:TextOutlineDrawable
-            x:Key="EmptyTextDrawable"
-            Text="Здесь пока пусто"
-            FontSize="48"
-            TextColor="#FFBC5A"
-            OutlineColor="#000000"
-            OutlineThickness="1.4"
-            HorizontalAlignment="Center"
-            VerticalAlignment="Center" />
-        <drawable:TextOutlineDrawable
-            x:Key="AddEventTextDrawable"
-            Text="Добавить событие"
-            FontSize="36"
-            TextColor="#FF8E58"
-            OutlineColor="#000000"
-            OutlineThickness="1.4"
-            HorizontalAlignment="Left"
             VerticalAlignment="Center" />
     </ContentPage.Resources>
 
@@ -88,82 +70,9 @@
                     </BoxView.Background>
                 </BoxView>
             </Grid>
-            <Grid
-                    Grid.Row="1"
-                    IsVisible="{Binding IsEventsEmpty, Converter={StaticResource BooleanToVisibilityConverter}}">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="70*" />
-                    <RowDefinition Height="30*" />
-                </Grid.RowDefinitions>
 
-                <GraphicsView
-                    Grid.Row="0"
-                    Drawable="{StaticResource EmptyTextDrawable}"
-                    HorizontalOptions="Center"
-                    VerticalOptions="Center"
-                    WidthRequest="270"
-                    HeightRequest="150" />
+            <ContentView Grid.Row="1" Content="{Binding CurrentContent}"/>
 
-                <Grid
-                        Grid.Row="1">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="30*" />
-                        <ColumnDefinition Width="40*" />
-                        <ColumnDefinition Width="20*" />
-                        <ColumnDefinition Width="10*" />
-                    </Grid.ColumnDefinitions>
-
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="30*" />
-                        <RowDefinition Height="30*" />
-                        <RowDefinition Height="30*" />
-                    </Grid.RowDefinitions>
-
-                    <GraphicsView
-                        Grid.Column="1"
-                        Grid.Row="0"
-                        Drawable="{StaticResource AddEventTextDrawable}"
-                        HeightRequest="100" />
-
-                    <Image
-                        Grid.Column="2"
-                        Grid.Row="0"
-                        Source="arrow.svg"
-                        HeightRequest="50"
-                        Aspect="AspectFit"
-                        VerticalOptions="End"
-                        HorizontalOptions="Start"
-                        Margin="9,0,0,0"
-                        SemanticProperties.Description="arrow" />
-
-                    <Image
-                        Grid.Column="2"
-                        Grid.Row="1"
-                        Source="gift.svg"
-                        Aspect="AspectFit"
-                        HeightRequest="110"
-                        SemanticProperties.Description="gift" />
-                </Grid>
-            </Grid>
-            <ScrollView
-                    Grid.Row="1"
-                    BackgroundColor="#C3FDBD"
-                    IsVisible="{Binding HasAnyEvents, Converter={StaticResource BooleanToVisibilityConverter}}">
-                <VerticalStackLayout
-                    Padding="30,0"
-                    Spacing="25">
-                <Image
-                    Source="cake.svg"
-                    HeightRequest="185"
-                    Aspect="AspectFit"
-                    SemanticProperties.Description="cake" />
-
-                <Label
-                    Text="Hello, World! 2"
-                    Style="{StaticResource Headline}"
-                    SemanticProperties.HeadingLevel="Level1" />
-                </VerticalStackLayout>
-            </ScrollView>
             <FlexLayout
                     Grid.Row="2"
                     Direction="Row"

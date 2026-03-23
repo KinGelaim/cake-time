@@ -13,11 +13,6 @@ public sealed class EventsListViewModel : NotificationObject
         {
             _events = value;
             OnPropertyChanged(nameof(Events));
-            OnPropertyChanged(nameof(IsEventsEmpty));
-            OnPropertyChanged(nameof(HasAnyEvents));
         }
     }
-
-    public bool IsEventsEmpty => Events.Count == 0;
-    public bool HasAnyEvents => Events.Count != 0;
 }

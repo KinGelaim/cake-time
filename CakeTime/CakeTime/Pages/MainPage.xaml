@@ -88,17 +88,29 @@
                 </FlexLayout.Background>
 
                 <VerticalStackLayout HorizontalOptions="Center">
-                    <Image Source="events_list_icon.svg" />
+                    <Image Source="events_list_icon.svg">
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding ShowEmptyEventListContentCommand}" />
+                        </Image.GestureRecognizers>
+                    </Image>
                     <Label Text="События" HorizontalOptions="Center" TextColor="#000000" />
                 </VerticalStackLayout>
 
                 <VerticalStackLayout HorizontalOptions="Center">
-                    <Image Source="calendar_icon.svg" />
+                    <Image Source="calendar_icon.svg">
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding ShowCalendarContentCommand}" />
+                        </Image.GestureRecognizers>
+                    </Image>
                     <Label Text="Календарь" HorizontalOptions="Center" TextColor="#000000" />
                 </VerticalStackLayout>
 
                 <VerticalStackLayout HorizontalOptions="Center">
-                    <Image Source="settings_icon.svg" />
+                    <Image Source="settings_icon.svg">
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding ShowSettingsContentCommand}" />
+                        </Image.GestureRecognizers>
+                    </Image>
                     <Label Text="Настройки" HorizontalOptions="Center" TextColor="#000000" />
                 </VerticalStackLayout>
             </FlexLayout>

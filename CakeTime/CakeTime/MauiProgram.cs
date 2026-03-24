@@ -16,7 +16,6 @@ public static class MauiProgram
             });
 
         builder.Services.AddTransient<MainViewModel>();
-        builder.Services.AddTransient<EventsListViewModel>();
 
 #if DEBUG
 		builder.Logging.AddDebug();

@@ -129,7 +129,7 @@
                 <VerticalStackLayout Grid.Column="3" Grid.Row="0" Grid.RowSpan="4" VerticalOptions="Center">
                     <Image Source="gift.svg">
                         <Image.GestureRecognizers>
-                            <TapGestureRecognizer Command="{Binding ShowSettingsContentCommand}" />
+                            <TapGestureRecognizer Command="{Binding ShowEventAddContentCommand}" />
                         </Image.GestureRecognizers>
                     </Image>
                     <Label Text="Добавить событие" HorizontalTextAlignment="Center" TextColor="#000000" />

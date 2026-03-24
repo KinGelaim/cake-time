@@ -9,10 +9,14 @@ public partial class MainViewModel : NotificationObject
     public EventListContent EventListContent { get; } = new EventListContent();
     public CalendarContent CalendarContent { get; } = new CalendarContent();
     public SettingsContent SettingsContent { get; } = new SettingsContent();
+    public EventAddContent EventAddContent { get; } = new EventAddContent();
+    public EventEditContent EventEditContent { get; } = new EventEditContent();
 
     public DelegateCommand ShowEmptyEventListContentCommand { get; }
     public DelegateCommand ShowCalendarContentCommand { get; }
     public DelegateCommand ShowSettingsContentCommand { get; }
+    public DelegateCommand ShowEventAddContentCommand { get; }
+    public DelegateCommand ShowEventEditContentCommand { get; }
 
     private View _currentContent;
     public View CurrentContent
@@ -32,6 +36,8 @@ public partial class MainViewModel : NotificationObject
         ShowEmptyEventListContentCommand = new DelegateCommand(OnEventListImageClick);
         ShowCalendarContentCommand = new DelegateCommand(OnCalendarImageClick);
         ShowSettingsContentCommand = new DelegateCommand(OnSettingsImageClick);
+        ShowEventAddContentCommand = new DelegateCommand(OnEventAddImageClick);
+        ShowEventEditContentCommand = new DelegateCommand(OnEventEditClick);
     }
 
     private void OnEventListImageClick()
@@ -47,5 +53,15 @@ public partial class MainViewModel : NotificationObject
     private void OnSettingsImageClick()
     {
         CurrentContent = SettingsContent;
+    }
+
+    private void OnEventAddImageClick()
+    {
+        CurrentContent = EventAddContent;
+    }
+
+    private void OnEventEditClick()
+    {
+        CurrentContent = EventEditContent;
     }
 }

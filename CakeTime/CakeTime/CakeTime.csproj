@@ -96,6 +96,12 @@
 	  <MauiXaml Update="Views\EmptyEventListContent.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Views\EventAddContent.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\EventEditContent.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Views\EventListContent.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>

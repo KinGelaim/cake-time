@@ -1,18 +1,17 @@
-﻿using CakeTime.Infrastructure.Environment;
+using CakeTime.Infrastructure.Environment;
 using System.Collections.ObjectModel;
 
 namespace CakeTime.Presentation.ViewModels;
 
 public sealed class EventsListViewModel : NotificationObject
 {
-    private ObservableCollection<string> _events = [];
     public ObservableCollection<string> Events
     {
-        get => _events;
+        get;
         set
         {
-            _events = value;
+            field = value;
             OnPropertyChanged(nameof(Events));
         }
-    }
+    } = [];
 }

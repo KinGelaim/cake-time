@@ -1,3 +1,3 @@
-﻿namespace CakeTime.Presentation.ViewModels;
+namespace CakeTime.Presentation.ViewModels;
 
 public sealed class EmptyEventListViewModel;

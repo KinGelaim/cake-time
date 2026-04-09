@@ -1,4 +1,4 @@
-﻿using System.Diagnostics;
+using System.Diagnostics;
 using System.Windows.Input;
 
 namespace CakeTime.Infrastructure.Environment;
@@ -38,7 +38,7 @@ public class DelegateCommand : ICommand
     [DebuggerStepThrough]
     bool ICommand.CanExecute(object? parameter) => CanExecute();
 
-    void ICommand.Execute(object? parameter) => this.Execute();
+    void ICommand.Execute(object? parameter) => Execute();
 
     #endregion ICommand
 }

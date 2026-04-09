@@ -1,4 +1,4 @@
-﻿namespace CakeTime.Presentation.Drawable;
+namespace CakeTime.Presentation.Drawable;
 
 internal sealed class TextOutlineDrawable : BindableObject, IDrawable
 {

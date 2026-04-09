@@ -1,4 +1,4 @@
-﻿using CakeTime.Presentation.ViewModels;
+using CakeTime.Presentation.ViewModels;
 using Microsoft.Extensions.Logging;
 
 namespace CakeTime;
@@ -10,15 +10,12 @@ public static class MauiProgram
         var builder = MauiApp.CreateBuilder();
         builder
             .UseMauiApp<App>()
-            .ConfigureFonts(fonts =>
-            {
-                fonts.AddFont("DroidSansMono.ttf", "DroidSansMono");
-            });
+            .ConfigureFonts(fonts => fonts.AddFont("DroidSansMono.ttf", "DroidSansMono"));
 
         builder.Services.AddTransient<MainViewModel>();
 
 #if DEBUG
-		builder.Logging.AddDebug();
+        builder.Logging.AddDebug();
 #endif
 
         return builder.Build();

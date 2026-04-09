@@ -1,4 +1,4 @@
-﻿using CakeTime.Infrastructure.Environment;
+using CakeTime.Infrastructure.Environment;
 using CakeTime.Presentation.Views;
 
 namespace CakeTime.Presentation.ViewModels;
@@ -40,28 +40,13 @@ public partial class MainViewModel : NotificationObject
         ShowEventEditContentCommand = new DelegateCommand(OnEventEditClick);
     }
 
-    private void OnEventListImageClick()
-    {
-        CurrentContent = EmptyEventListContent;
-    }
+    private void OnEventListImageClick() => CurrentContent = EmptyEventListContent;
 
-    private void OnCalendarImageClick()
-    {
-        CurrentContent = CalendarContent;
-    }
+    private void OnCalendarImageClick() => CurrentContent = CalendarContent;
 
-    private void OnSettingsImageClick()
-    {
-        CurrentContent = SettingsContent;
-    }
+    private void OnSettingsImageClick() => CurrentContent = SettingsContent;
 
-    private void OnEventAddImageClick()
-    {
-        CurrentContent = EventAddContent;
-    }
+    private void OnEventAddImageClick() => CurrentContent = EventAddContent;
 
-    private void OnEventEditClick()
-    {
-        CurrentContent = EventEditContent;
-    }
+    private void OnEventEditClick() => CurrentContent = EventEditContent;
 }

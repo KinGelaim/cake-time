@@ -1,3 +1,3 @@
-﻿namespace CakeTime.Domain;
+namespace CakeTime.Domain;
 
 public interface IEventRepository;

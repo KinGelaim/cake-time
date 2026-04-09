@@ -1,3 +1,3 @@
-﻿namespace CakeTime.Application;
+namespace CakeTime.Application;
 
 public sealed class AddEventCommand;

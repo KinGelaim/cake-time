@@ -1,3 +1,3 @@
-﻿namespace CakeTime.Infrastructure;
+namespace CakeTime.Infrastructure;
 
 public sealed class EventRepository;

@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:converters="clr-namespace:CakeTime.Presentation.Converters"
+             xmlns:viewmodels="clr-namespace:CakeTime.Presentation.ViewModels"
+             xmlns:drawable="clr-namespace:CakeTime.Presentation.Drawable"
+             x:DataType="viewmodels:EmptyEventListViewModel"
+             x:Class="CakeTime.Presentation.Views.EmptyEventListContent">
+    <ContentView.Resources>
+        <drawable:TextOutlineDrawable
+            x:Key="EmptyTextDrawable"
+            Text="Здесь пока пусто"
+            FontSize="48"
+            TextColor="#FFBC5A"
+            OutlineColor="#000000"
+            OutlineThickness="1.4"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center" />
+        <drawable:TextOutlineDrawable
+            x:Key="AddEventTextDrawable"
+            Text="Добавьте первое событие"
+            FontSize="36"
+            TextColor="#FF8E58"
+            OutlineColor="#000000"
+            OutlineThickness="1.4"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center" />
+    </ContentView.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="90*" />
+            <RowDefinition Height="10*" />
+        </Grid.RowDefinitions>
+
+        <GraphicsView
+            Grid.Row="0"
+            Drawable="{StaticResource EmptyTextDrawable}"
+            HorizontalOptions="Center"
+            VerticalOptions="Center"
+            WidthRequest="270"
+            HeightRequest="150" />
+
+        <Grid
+                Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="30*" />
+                <ColumnDefinition Width="20*" />
+                <ColumnDefinition Width="20*" />
+                <ColumnDefinition Width="20*" />
+            </Grid.ColumnDefinitions>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="30*" />
+                <RowDefinition Height="30*" />
+                <RowDefinition Height="30*" />
+            </Grid.RowDefinitions>
+
+            <GraphicsView
+                Grid.Column="0"
+                Grid.ColumnSpan="3"
+                Grid.Row="0"
+                Drawable="{StaticResource AddEventTextDrawable}"
+                HeightRequest="100" />
+
+            <Image
+                Grid.Column="3"
+                Grid.Row="0"
+                Source="arrow.svg"
+                HeightRequest="70"
+                Aspect="AspectFit"
+                VerticalOptions="Start"
+                HorizontalOptions="Start"
+                SemanticProperties.Description="arrow" />
+        </Grid>
+    </Grid>
+</ContentView>

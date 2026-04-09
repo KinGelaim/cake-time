@@ -1,3 +1,9 @@
 <Solution>
-  <Project Path="CakeTime/CakeTime.csproj" />
+  <Project Path="CakeTime.Application/CakeTime.Application.csproj" Id="3d25891f-7b62-41e9-bea0-4a2bfc30fd3a" />
+  <Project Path="CakeTime.Domain/CakeTime.Domain.csproj" Id="9b07d801-aeed-40d1-a6d3-4d9019a41ef4" />
+  <Project Path="CakeTime.Infrastructure/CakeTime.Infrastructure.csproj" Id="e98f885f-f90a-428b-afaa-dba5eff98217" />
+  <Project Path="CakeTime.Presentation/CakeTime.Presentation.csproj" Id="779fb0c0-6750-4541-a754-cb921824902e" />
+  <Project Path="CakeTime/CakeTime.csproj">
+    <Deploy Solution="Debug|*" />
+  </Project>
 </Solution>

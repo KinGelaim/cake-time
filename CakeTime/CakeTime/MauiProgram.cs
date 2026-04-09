@@ -1,4 +1,4 @@
-﻿using CakeTime.ViewModels;
+﻿using CakeTime.Presentation.ViewModels;
 using Microsoft.Extensions.Logging;
 
 namespace CakeTime;

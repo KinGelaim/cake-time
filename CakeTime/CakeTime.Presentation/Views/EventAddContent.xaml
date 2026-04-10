@@ -20,9 +20,9 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="40" />
             <RowDefinition Height="29" />
-            <RowDefinition />
+            <RowDefinition Height="Auto" />
             <RowDefinition Height="20" />
-            <RowDefinition />
+            <RowDefinition Height="Auto" />
             <RowDefinition />
         </Grid.RowDefinitions>
 
@@ -69,19 +69,37 @@
                     StrokeShape="RoundRectangle 10"
                     BackgroundColor="#503DD9A0"
                     Padding="10,0">
+                <Border.Triggers>
+                    <DataTrigger
+                            TargetType="Border"
+                            Binding="{Binding NameError, Converter={StaticResource NullToBooleanConverter}}"
+                            Value="True">
+                        <Setter Property="Stroke" Value="Red"/>
+                    </DataTrigger>
+                </Border.Triggers>
                 <Entry
                     Text="{Binding EventData.Name, Mode=TwoWay}"
                     Placeholder="Имя*" />
             </Border>
             <Label Text="{Binding NameError}" TextColor="Red" IsVisible="{Binding NameError, Converter={StaticResource NullToBooleanConverter}}"/>
 
-            <Grid ColumnDefinitions="Auto, *, Auto">
+            <Grid
+                    RowDefinitions="Auto, Auto, Auto"
+                    ColumnDefinitions="Auto, *, Auto">
                 <Border
                         Grid.Column="0"
                         WidthRequest="80"
                         StrokeShape="RoundRectangle 10"
                         BackgroundColor="#503DD9A0"
                         Padding="10,0">
+                    <Border.Triggers>
+                        <DataTrigger
+                                TargetType="Border"
+                                Binding="{Binding DayError, Converter={StaticResource NullToBooleanConverter}}"
+                                Value="True">
+                            <Setter Property="Stroke" Value="Red"/>
+                        </DataTrigger>
+                    </Border.Triggers>
                     <Entry
                         Placeholder="День*"
                         Keyboard="Numeric"
@@ -94,6 +112,14 @@
                         BackgroundColor="#503DD9A0"
                         Padding="10,0"
                         Margin="10,0">
+                    <Border.Triggers>
+                        <DataTrigger
+                                TargetType="Border"
+                                Binding="{Binding MonthError, Converter={StaticResource NullToBooleanConverter}}"
+                                Value="True">
+                            <Setter Property="Stroke" Value="Red"/>
+                        </DataTrigger>
+                    </Border.Triggers>
                     <Picker Title="Месяц*">
                         <Picker.Items>
                             <x:String>Январь</x:String>
@@ -123,6 +149,9 @@
                         Keyboard="Numeric"
                         MaxLength="4" />
                 </Border>
+
+                <Label Grid.Row="1" Grid.ColumnSpan="3" Text="{Binding DayError}" TextColor="Red" IsVisible="{Binding DayError, Converter={StaticResource NullToBooleanConverter}}"/>
+                <Label Grid.Row="2" Grid.ColumnSpan="3" Text="{Binding MonthError}" TextColor="Red" IsVisible="{Binding MonthError, Converter={StaticResource NullToBooleanConverter}}"/>
             </Grid>
 
             <Border

@@ -33,6 +33,26 @@ public sealed class EventAddViewModel : NotificationObject
         }
     }
 
+    public string? DayError
+    {
+        get;
+        set
+        {
+            field = value;
+            OnPropertyChanged(nameof(DayError));
+        }
+    }
+
+    public string? MonthError
+    {
+        get;
+        set
+        {
+            field = value;
+            OnPropertyChanged(nameof(MonthError));
+        }
+    }
+
     public EventAddViewModel(EventService eventService)
     {
         _eventService = eventService;
@@ -43,9 +63,9 @@ public sealed class EventAddViewModel : NotificationObject
 
     private void OnAddEventBtnClick()
     {
-        ValidateName();
+        ValidateEventData();
 
-        if (NameError is not null)
+        if (NameError is not null || DayError is not null || MonthError is not null)
         {
             return;
         }
@@ -68,15 +88,16 @@ public sealed class EventAddViewModel : NotificationObject
         OnCloseBtnClick?.Invoke();
     }
 
-    private void ValidateName()
+    private void ValidateEventData()
     {
-        if (string.IsNullOrEmpty(EventData.Name) || EventData.Name.Length < 3)
-        {
-            NameError = "Имя должно содержать минимум 3 символа";
-        }
-        else
-        {
-            NameError = null;
-        }
+        NameError = string.IsNullOrEmpty(EventData.Name) || EventData.Name.Length < 3
+            ? "Имя должно содержать минимум 3 символа"
+            : null;
+        DayError = EventData.Day is <= 0 or > 31
+            ? "День должен быть между 1 и 31"
+            : null;
+        MonthError = EventData.Month is <= 0 or > 12
+            ? "Месяц должен быть между 1 и 12"
+            : null;
     }
 }

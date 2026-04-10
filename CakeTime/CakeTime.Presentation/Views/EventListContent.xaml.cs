@@ -4,9 +4,9 @@ namespace CakeTime.Presentation.Views;
 
 public partial class EventListContent : ContentView
 {
-    public EventListContent()
+    public EventListContent(EventsListViewModel viewModel)
     {
         InitializeComponent();
-        BindingContext = new EventsListViewModel();
+        BindingContext = viewModel;
     }
 }

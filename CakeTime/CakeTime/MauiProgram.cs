@@ -1,3 +1,6 @@
+using CakeTime.Application;
+using CakeTime.Domain;
+using CakeTime.Infrastructure;
 using CakeTime.Presentation.ViewModels;
 using Microsoft.Extensions.Logging;
 
@@ -13,6 +16,8 @@ public static class MauiProgram
             .ConfigureFonts(fonts => fonts.AddFont("DroidSansMono.ttf", "DroidSansMono"));
 
         builder.Services.AddTransient<MainViewModel>();
+        builder.Services.AddSingleton<IEventRepository, EventRepository>();
+        builder.Services.AddSingleton<EventService>();
 
 #if DEBUG
         builder.Logging.AddDebug();

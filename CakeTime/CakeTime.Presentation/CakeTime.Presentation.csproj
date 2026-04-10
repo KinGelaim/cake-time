@@ -11,6 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\CakeTime.Application\CakeTime.Application.csproj" />
     <ProjectReference Include="..\CakeTime.Infrastructure\CakeTime.Infrastructure.csproj" />
   </ItemGroup>
 

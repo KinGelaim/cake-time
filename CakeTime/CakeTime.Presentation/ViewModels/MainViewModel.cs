@@ -1,3 +1,4 @@
+using CakeTime.Application;
 using CakeTime.Infrastructure.Environment;
 using CakeTime.Presentation.Views;
 
@@ -6,10 +7,10 @@ namespace CakeTime.Presentation.ViewModels;
 public partial class MainViewModel : NotificationObject
 {
     public EmptyEventListContent EmptyEventListContent { get; } = new EmptyEventListContent();
-    public EventListContent EventListContent { get; } = new EventListContent();
+    public EventListContent EventListContent { get; }
     public CalendarContent CalendarContent { get; } = new CalendarContent();
     public SettingsContent SettingsContent { get; } = new SettingsContent();
-    public EventAddContent EventAddContent { get; } = new EventAddContent();
+    public EventAddContent EventAddContent { get; }
     public EventEditContent EventEditContent { get; } = new EventEditContent();
 
     public DelegateCommand ShowEmptyEventListContentCommand { get; }
@@ -29,9 +30,33 @@ public partial class MainViewModel : NotificationObject
         }
     }
 
-    public MainViewModel()
+    private readonly EventService _eventService;
+
+    public MainViewModel(EventService eventService)
     {
-        _currentContent = EmptyEventListContent;
+        _eventService = eventService;
+
+        Task.Run(() => _eventService.LoadEventsAsync())
+            .ContinueWith(t =>
+            {
+                if (!t.IsCompletedSuccessfully)
+                {
+                    return;
+                }
+
+                CurrentContent = GetCurrentEventListContent();
+            });
+
+        var eventsListViewModel = new EventsListViewModel(_eventService);
+        var eventAddViewModel = new EventAddViewModel(_eventService);
+        eventAddViewModel.OnCloseBtnClick += OnEventListImageClick;
+
+        EventListContent = new EventListContent(eventsListViewModel);
+        EventAddContent = new EventAddContent(eventAddViewModel);
+
+        _eventService.EventsChanged += CheckCurrentEventListContent;
+
+        _currentContent = GetCurrentEventListContent();
 
         ShowEmptyEventListContentCommand = new DelegateCommand(OnEventListImageClick);
         ShowCalendarContentCommand = new DelegateCommand(OnCalendarImageClick);
@@ -40,7 +65,21 @@ public partial class MainViewModel : NotificationObject
         ShowEventEditContentCommand = new DelegateCommand(OnEventEditClick);
     }
 
-    private void OnEventListImageClick() => CurrentContent = EmptyEventListContent;
+    private ContentView GetCurrentEventListContent() =>
+        _eventService.Events.Count > 0
+            ? EventListContent
+            : EmptyEventListContent;
+
+    private void CheckCurrentEventListContent()
+    {
+        var newContent = GetCurrentEventListContent();
+        if (newContent != CurrentContent)
+        {
+            CurrentContent = newContent;
+        }
+    }
+
+    private void OnEventListImageClick() => CurrentContent = GetCurrentEventListContent();
 
     private void OnCalendarImageClick() => CurrentContent = CalendarContent;
 

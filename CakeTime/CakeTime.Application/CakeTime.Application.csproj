@@ -6,4 +6,8 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\CakeTime.Domain\CakeTime.Domain.csproj" />
+  </ItemGroup>
+
 </Project>

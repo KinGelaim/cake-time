@@ -28,7 +28,17 @@ public sealed class EventsListViewModel : NotificationObject
         DeleteEventCommand = new DelegateCommand<int>(OnDeleteEventBtnClick);
 
         _eventService.EventsChanged += LoadEvents;
-        LoadEvents();
+
+        Task.Run(() => _eventService.LoadEventsAsync())
+            .ContinueWith(t =>
+            {
+                if (!t.IsCompletedSuccessfully)
+                {
+                    return;
+                }
+
+                LoadEvents();
+            });
     }
 
     private void LoadEvents()

@@ -104,14 +104,21 @@ public sealed class EventAddViewModel : NotificationObject
                     return;
                 }
 
-                EventData = new EventData();
+                ClearSelectedData();
             });
     }
 
     private void OnCloseEventBtnClick()
     {
-        EventData = new EventData();
+        ClearSelectedData();
         OnCloseBtnClick?.Invoke();
+    }
+
+    private void ClearSelectedData()
+    {
+        SelectedDay = null;
+        SelectedMonth = null;
+        EventData = new EventData();
     }
 
     private void ValidateEventData()

@@ -14,7 +14,12 @@
                 <CollectionView.ItemTemplate>
                     <DataTemplate x:DataType="models:EventData">
                         <VerticalStackLayout>
+                            <Label Text="{Binding Id}"/>
                             <Label Text="{Binding Name}"/>
+                            <Label Text="{Binding Day}"/>
+                            <Label Text="{Binding Month}"/>
+                            <Label Text="{Binding Year}"/>
+                            <Label Text="{Binding Comment}"/>
                             <Button
                                 Text="Удалить"
                                 Command="{Binding x:DataType='viewmodels:EventsListViewModel', Source={RelativeSource AncestorType={x:Type viewmodels:EventsListViewModel}}, Path=DeleteEventCommand}"

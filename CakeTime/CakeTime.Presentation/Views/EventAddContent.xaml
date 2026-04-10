@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:viewmodels="clr-namespace:CakeTime.Presentation.ViewModels"
              xmlns:converters="clr-namespace:CakeTime.Presentation.Converters"
+             xmlns:models="clr-namespace:CakeTime.Presentation.Models"
              x:DataType="viewmodels:EventAddViewModel"
              x:Class="CakeTime.Presentation.Views.EventAddContent">
     <ContentView.Resources>
@@ -101,6 +102,7 @@
                         </DataTrigger>
                     </Border.Triggers>
                     <Entry
+                        Text="{Binding SelectedDay, Mode=TwoWay}"
                         Placeholder="День*"
                         Keyboard="Numeric"
                         MaxLength="2" />
@@ -120,22 +122,11 @@
                             <Setter Property="Stroke" Value="Red"/>
                         </DataTrigger>
                     </Border.Triggers>
-                    <Picker Title="Месяц*">
-                        <Picker.Items>
-                            <x:String>Январь</x:String>
-                            <x:String>Февраль</x:String>
-                            <x:String>Март</x:String>
-                            <x:String>Апрель</x:String>
-                            <x:String>Май</x:String>
-                            <x:String>Июнь</x:String>
-                            <x:String>Июль</x:String>
-                            <x:String>Август</x:String>
-                            <x:String>Сентябрь</x:String>
-                            <x:String>Октябрь</x:String>
-                            <x:String>Ноябрь</x:String>
-                            <x:String>Декабрь</x:String>
-                        </Picker.Items>
-                    </Picker>
+                    <Picker
+                        Title="Месяц*"
+                        ItemsSource="{Binding Months}"
+                        ItemDisplayBinding="{Binding Name, x:DataType=models:MonthItem}"
+                        SelectedItem="{Binding SelectedMonth}" />
                 </Border>
 
                 <Border
@@ -145,6 +136,7 @@
                         BackgroundColor="#503DD9A0"
                         Padding="10,0">
                     <Entry
+                        Text="{Binding EventData.Year, Mode=TwoWay}"
                         Placeholder="Год"
                         Keyboard="Numeric"
                         MaxLength="4" />

@@ -64,7 +64,10 @@ public sealed class EventsListViewModel : NotificationObject
             .ToList();
 
         // Сортируем по дате
-        var sortedEvents = eventsWithDate.OrderBy(e => e.Date).ToList();
+        var sortedEvents = eventsWithDate
+            .OrderBy(e => e.Date)
+            .ThenBy(e => e.Event.Id)
+            .ToList();
 
         // Группируем по месяцам и годам
         var grouped = sortedEvents

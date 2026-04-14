@@ -55,6 +55,26 @@ public sealed class EventAddViewModel : NotificationObject
         }
     }
 
+    public int? SelectedDay
+    {
+        get;
+        set
+        {
+            field = value;
+            OnPropertyChanged(nameof(SelectedDay));
+        }
+    }
+
+    public MonthItem? SelectedMonth
+    {
+        get;
+        set
+        {
+            field = value;
+            OnPropertyChanged(nameof(SelectedMonth));
+        }
+    }
+
 #pragma warning disable CA1822 // Пометьте члены как статические
     public ObservableCollection<MonthItem> Months =>
     [
@@ -72,9 +92,6 @@ public sealed class EventAddViewModel : NotificationObject
         new MonthItem { Number = 12, Name = "Декабрь" }
     ];
 #pragma warning restore CA1822 // Пометьте члены как статические
-
-    public MonthItem? SelectedMonth { get; set; }
-    public int? SelectedDay { get; set; }
 
     public EventAddViewModel(EventService eventService)
     {

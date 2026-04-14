@@ -11,13 +11,11 @@ public partial class MainViewModel : NotificationObject
     public CalendarContent CalendarContent { get; } = new CalendarContent();
     public SettingsContent SettingsContent { get; } = new SettingsContent();
     public EventAddContent EventAddContent { get; }
-    public EventEditContent EventEditContent { get; } = new EventEditContent();
 
     public DelegateCommand ShowEmptyEventListContentCommand { get; }
     public DelegateCommand ShowCalendarContentCommand { get; }
     public DelegateCommand ShowSettingsContentCommand { get; }
     public DelegateCommand ShowEventAddContentCommand { get; }
-    public DelegateCommand ShowEventEditContentCommand { get; }
 
     private View _currentContent;
     public View CurrentContent
@@ -48,6 +46,8 @@ public partial class MainViewModel : NotificationObject
             });
 
         var eventsListViewModel = new EventsListViewModel(_eventService);
+        eventsListViewModel.OnEditEventClick += OnEventEditClick;
+
         var eventAddViewModel = new EventAddViewModel(_eventService);
         eventAddViewModel.OnCloseBtnClick += OnEventListImageClick;
 
@@ -62,7 +62,6 @@ public partial class MainViewModel : NotificationObject
         ShowCalendarContentCommand = new DelegateCommand(OnCalendarImageClick);
         ShowSettingsContentCommand = new DelegateCommand(OnSettingsImageClick);
         ShowEventAddContentCommand = new DelegateCommand(OnEventAddImageClick);
-        ShowEventEditContentCommand = new DelegateCommand(OnEventEditClick);
     }
 
     private ContentView GetCurrentEventListContent() =>
@@ -87,5 +86,13 @@ public partial class MainViewModel : NotificationObject
 
     private void OnEventAddImageClick() => CurrentContent = EventAddContent;
 
-    private void OnEventEditClick() => CurrentContent = EventEditContent;
+    private void OnEventEditClick(int eventId)
+    {
+        // TODO: Memory leak
+        var eventEditViewModel = new EventEditViewModel(eventId, _eventService);
+        eventEditViewModel.OnCloseBtnClick += OnEventListImageClick;
+
+        var eventEditContent = new EventEditContent(eventEditViewModel);
+        CurrentContent = eventEditContent;
+    }
 }

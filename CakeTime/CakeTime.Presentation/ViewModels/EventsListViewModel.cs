@@ -20,13 +20,14 @@ public sealed class EventsListViewModel : NotificationObject
         }
     } = [];
 
-    public DelegateCommand<int> DeleteEventCommand { get; }
+    public DelegateCommand<int> EditEventCommand { get; }
+    public event Action<int>? OnEditEventClick;
 
     public EventsListViewModel(EventService eventService)
     {
         _eventService = eventService;
 
-        DeleteEventCommand = new DelegateCommand<int>(OnDeleteEventBtnClick);
+        EditEventCommand = new DelegateCommand<int>(OnEditEventBtnClick);
 
         _eventService.EventsChanged += LoadEvents;
 
@@ -92,6 +93,5 @@ public sealed class EventsListViewModel : NotificationObject
         }
     }
 
-    private void OnDeleteEventBtnClick(int id) =>
-        Task.Run(() => _eventService.DeleteEventAsync(id));
+    private void OnEditEventBtnClick(int eventId) => OnEditEventClick?.Invoke(eventId);
 }

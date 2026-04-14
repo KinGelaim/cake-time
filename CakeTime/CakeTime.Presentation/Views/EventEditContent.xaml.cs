@@ -4,9 +4,9 @@ namespace CakeTime.Presentation.Views;
 
 public partial class EventEditContent : ContentView
 {
-    public EventEditContent()
+    public EventEditContent(EventEditViewModel viewModel)
     {
         InitializeComponent();
-        BindingContext = new EventEditViewModel();
+        BindingContext = viewModel;
     }
 }

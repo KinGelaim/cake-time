@@ -2,12 +2,185 @@
 <ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:viewmodels="clr-namespace:CakeTime.Presentation.ViewModels"
+             xmlns:converters="clr-namespace:CakeTime.Presentation.Converters"
+             xmlns:models="clr-namespace:CakeTime.Presentation.Models"
              x:DataType="viewmodels:EventEditViewModel"
              x:Class="CakeTime.Presentation.Views.EventEditContent">
-    <VerticalStackLayout>
-        <Label 
-            Text="Edit"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
+    <ContentView.Resources>
+        <converters:NullToBooleanConverter x:Key="NullToBooleanConverter"/>
+    </ContentView.Resources>
+    <ScrollView>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="60" />
+                <ColumnDefinition />
+                <ColumnDefinition />
+                <ColumnDefinition />
+                <ColumnDefinition Width="60" />
+            </Grid.ColumnDefinitions>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="40" />
+                <RowDefinition Height="29" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="20" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="10" />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+
+            <Grid Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="5">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <Button
+                    Grid.Column="0"
+                    Text="Именинник" />
+
+                <BoxView
+                    Grid.Column="1"
+                    BackgroundColor="#ffffff"
+                    WidthRequest="5"/>
+
+                <Button
+                    Grid.Column="2"
+                    Text="Событие"/>
+            </Grid>
+
+            <Border
+                    Grid.Column="1"
+                    Grid.ColumnSpan="3"
+                    Grid.Row="2"
+                    StrokeThickness="5"
+                    StrokeShape="RoundRectangle 40"
+                    BackgroundColor="#70D577"
+                    WidthRequest="145">
+                <Image
+                    Source="human1.png"
+                    WidthRequest="145" />
+            </Border>
+
+            <VerticalStackLayout
+                    Grid.Column="1"
+                    Grid.ColumnSpan="3"
+                    Grid.Row="4"
+                    Spacing="10">
+                <Border
+                        StrokeShape="RoundRectangle 10"
+                        BackgroundColor="#503DD9A0"
+                        Padding="10,0">
+                    <Border.Triggers>
+                        <DataTrigger
+                                TargetType="Border"
+                                Binding="{Binding NameError, Converter={StaticResource NullToBooleanConverter}}"
+                                Value="True">
+                            <Setter Property="Stroke" Value="Red"/>
+                        </DataTrigger>
+                    </Border.Triggers>
+                    <Entry
+                        Text="{Binding EventData.Name, Mode=TwoWay}"
+                        Placeholder="Имя*" />
+                </Border>
+                <Label Text="{Binding NameError}" TextColor="Red" IsVisible="{Binding NameError, Converter={StaticResource NullToBooleanConverter}}"/>
+
+                <Grid
+                        RowDefinitions="Auto, Auto, Auto"
+                        ColumnDefinitions="Auto, *, Auto">
+                    <Border
+                            Grid.Column="0"
+                            WidthRequest="80"
+                            StrokeShape="RoundRectangle 10"
+                            BackgroundColor="#503DD9A0"
+                            Padding="10,0">
+                        <Border.Triggers>
+                            <DataTrigger
+                                    TargetType="Border"
+                                    Binding="{Binding DayError, Converter={StaticResource NullToBooleanConverter}}"
+                                    Value="True">
+                                <Setter Property="Stroke" Value="Red"/>
+                            </DataTrigger>
+                        </Border.Triggers>
+                        <Entry
+                            Text="{Binding SelectedDay, Mode=TwoWay}"
+                            Placeholder="День*"
+                            Keyboard="Numeric"
+                            MaxLength="2" />
+                    </Border>
+
+                    <Border
+                            Grid.Column="1"
+                            StrokeShape="RoundRectangle 10"
+                            BackgroundColor="#503DD9A0"
+                            Padding="10,0"
+                            Margin="10,0">
+                        <Border.Triggers>
+                            <DataTrigger
+                                    TargetType="Border"
+                                    Binding="{Binding MonthError, Converter={StaticResource NullToBooleanConverter}}"
+                                    Value="True">
+                                <Setter Property="Stroke" Value="Red"/>
+                            </DataTrigger>
+                        </Border.Triggers>
+                        <Picker
+                            Title="Месяц*"
+                            ItemsSource="{Binding Months}"
+                            ItemDisplayBinding="{Binding Name, x:DataType=models:MonthItem}"
+                            SelectedItem="{Binding SelectedMonth}"/>
+                    </Border>
+
+                    <Border
+                            Grid.Column="2"
+                            WidthRequest="80"
+                            StrokeShape="RoundRectangle 10"
+                            BackgroundColor="#503DD9A0"
+                            Padding="10,0">
+                        <Entry
+                            Text="{Binding EventData.Year, Mode=TwoWay}"
+                            Placeholder="Год"
+                            Keyboard="Numeric"
+                            MaxLength="4" />
+                    </Border>
+
+                    <Label Grid.Row="1" Grid.ColumnSpan="3" Text="{Binding DayError}" TextColor="Red" IsVisible="{Binding DayError, Converter={StaticResource NullToBooleanConverter}}"/>
+                    <Label Grid.Row="2" Grid.ColumnSpan="3" Text="{Binding MonthError}" TextColor="Red" IsVisible="{Binding MonthError, Converter={StaticResource NullToBooleanConverter}}"/>
+                </Grid>
+
+                <Border
+                        StrokeShape="RoundRectangle 10"
+                        BackgroundColor="#503DD9A0"
+                        Padding="10,0">
+                    <Editor
+                        Text="{Binding EventData.Comment, Mode=TwoWay}"
+                        Placeholder="Вишлист (необязательно)"
+                        HeightRequest="120"/>
+                </Border>
+            </VerticalStackLayout>
+
+            <Grid
+                    Grid.Column="1"
+                    Grid.ColumnSpan="3"
+                    Grid.Row="6"
+                    ColumnDefinitions="*, Auto"
+                    HeightRequest="40">
+                <Button
+                    Grid.Column="0"
+                    HorizontalOptions="Start"
+                    Text="Отменить"
+                    TextColor="#623632"
+                    BackgroundColor="#90F48FB6"
+                    Command="{Binding CloseEventCommand}"/>
+
+                <Button
+                    Grid.Column="1"
+                    HorizontalOptions="End"
+                    Text="Сохранить"
+                    TextColor="#3D6232"
+                    BackgroundColor="#9064DF17"
+                    Command="{Binding AddEventCommand}" />
+            </Grid>
+        </Grid>
+    </ScrollView>
 </ContentView>

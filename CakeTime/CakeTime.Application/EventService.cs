@@ -40,4 +40,16 @@ public sealed class EventService(IEventRepository eventRepository)
             EventsChanged?.Invoke();
         }
     }
+
+    // TODO: temporary method
+    public async Task ClearAllTables()
+    {
+        await LoadEventsAsync();
+        foreach (var eventData in Events)
+        {
+            await _eventRepository.DeleteEventAsync(eventData);
+        }
+        await LoadEventsAsync();
+        EventsChanged?.Invoke();
+    }
 }

@@ -98,7 +98,7 @@
                 </BoxView>
 
                 <VerticalStackLayout Grid.Column="0" Grid.Row="2" Grid.RowSpan="2" VerticalOptions="Center">
-                    <Image Source="events_list_icon.svg">
+                    <Image Source="events_list_icon.png">
                         <Image.GestureRecognizers>
                             <TapGestureRecognizer Command="{Binding ShowEmptyEventListContentCommand}" />
                         </Image.GestureRecognizers>
@@ -107,7 +107,7 @@
                 </VerticalStackLayout>
 
                 <VerticalStackLayout Grid.Column="1" Grid.Row="2" Grid.RowSpan="2" VerticalOptions="Center">
-                    <Image Source="calendar_icon.svg">
+                    <Image Source="calendar_icon.png">
                         <Image.GestureRecognizers>
                             <TapGestureRecognizer Command="{Binding ShowCalendarContentCommand}" />
                         </Image.GestureRecognizers>
@@ -116,7 +116,7 @@
                 </VerticalStackLayout>
 
                 <VerticalStackLayout Grid.Column="2" Grid.Row="2" Grid.RowSpan="2" VerticalOptions="Center">
-                    <Image Source="settings_icon.svg">
+                    <Image Source="settings_icon.png">
                         <Image.GestureRecognizers>
                             <TapGestureRecognizer Command="{Binding ShowSettingsContentCommand}" />
                         </Image.GestureRecognizers>
@@ -125,7 +125,7 @@
                 </VerticalStackLayout>
 
                 <VerticalStackLayout Grid.Column="3" Grid.Row="0" Grid.RowSpan="4" VerticalOptions="Center">
-                    <Image Source="gift.svg">
+                    <Image Source="gift.png">
                         <Image.GestureRecognizers>
                             <TapGestureRecognizer Command="{Binding ShowEventAddContentCommand}" />
                         </Image.GestureRecognizers>

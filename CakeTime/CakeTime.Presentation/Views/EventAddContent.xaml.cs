@@ -2,7 +2,7 @@ using CakeTime.Presentation.ViewModels;
 
 namespace CakeTime.Presentation.Views;
 
-public partial class EventAddContent : ContentView
+public partial class EventAddContent : EventContentBase
 {
     public EventAddContent(EventAddViewModel viewModel)
     {

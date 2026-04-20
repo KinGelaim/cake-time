@@ -2,12 +2,41 @@
 <ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:viewmodels="clr-namespace:CakeTime.Presentation.ViewModels"
+             xmlns:models="clr-namespace:CakeTime.Presentation.Models"
              x:DataType="viewmodels:SettingsViewModel"
              x:Class="CakeTime.Presentation.Views.SettingsContent">
-    <VerticalStackLayout>
-        <Label 
-            Text="Settings"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
+    <VerticalStackLayout Padding="20" Spacing="20">
+        <Label
+            Text="Настройки уведомлений"/>
+
+        <CollectionView ItemsSource="{Binding SettingsGroups}">
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="models:NotificationSettingsView">
+                    <VerticalStackLayout>
+                        <Entry
+                            Text="{Binding DaysCountBeforeEvent}"
+                            Placeholder="Количество дней до события"/>
+                        <Entry
+                            Text="{Binding FirstNotificationHour}"
+                            Placeholder="Час первого уведомления"/>
+                        <Entry
+                            Text="{Binding NotificationCount}"
+                            Placeholder="Количество уведомлений"/>
+                        <Entry
+                            Text="{Binding MinutesInterval}"
+                            Placeholder="Интервал повтора в минутах"/>
+                    </VerticalStackLayout>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+        <Button
+            Text="+"
+            HorizontalOptions="End"
+            Command="{Binding AddNewGroupCommand}"/>
+
+        <Button
+            Text="Сохранить изменения"
+            Command="{Binding SaveSettingsCommand}"/>
     </VerticalStackLayout>
 </ContentView>

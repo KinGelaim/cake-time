@@ -17,5 +17,6 @@ internal sealed class LocalDBService
             dbFullPath,
             SQLiteOpenFlags.ReadWrite | SQLiteOpenFlags.Create | SQLiteOpenFlags.SharedCache);
         Connection.CreateTableAsync<EventData>();
+        Connection.CreateTableAsync<NotificationSetting>();
     }
 }

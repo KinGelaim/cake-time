@@ -9,7 +9,7 @@ public partial class MainViewModel : NotificationObject
     public EmptyEventListContent EmptyEventListContent { get; } = new EmptyEventListContent();
     public EventListContent EventListContent { get; }
     public CalendarContent CalendarContent { get; } = new CalendarContent();
-    public SettingsContent SettingsContent { get; } = new SettingsContent();
+    public SettingsContent SettingsContent { get; }
     public EventAddContent EventAddContent { get; }
 
     public DelegateCommand ShowEmptyEventListContentCommand { get; }
@@ -29,10 +29,14 @@ public partial class MainViewModel : NotificationObject
     }
 
     private readonly EventService _eventService;
+    private readonly NotificationSettingsService _notificationSettingsService;
 
-    public MainViewModel(EventService eventService)
+    public MainViewModel(
+        EventService eventService,
+        NotificationSettingsService notificationSettingsService)
     {
         _eventService = eventService;
+        _notificationSettingsService = notificationSettingsService;
 
         Task.Run(() => _eventService.LoadEventsAsync())
             .ContinueWith(t =>
@@ -53,6 +57,9 @@ public partial class MainViewModel : NotificationObject
 
         EventListContent = new EventListContent(eventsListViewModel);
         EventAddContent = new EventAddContent(eventAddViewModel);
+
+        var settingsViewModel = new SettingsViewModel(_notificationSettingsService);
+        SettingsContent = new SettingsContent(settingsViewModel);
 
         _eventService.EventsChanged += CheckCurrentEventListContent;
 

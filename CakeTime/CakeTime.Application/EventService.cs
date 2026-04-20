@@ -42,7 +42,7 @@ public sealed class EventService(IEventRepository eventRepository)
     }
 
     // TODO: temporary method
-    public async Task ClearAllTables()
+    public async Task ClearTable()
     {
         await LoadEventsAsync();
         foreach (var eventData in Events)

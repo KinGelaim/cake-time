@@ -4,9 +4,9 @@ namespace CakeTime.Presentation.Views;
 
 public partial class SettingsContent : ContentView
 {
-    public SettingsContent()
+    public SettingsContent(SettingsViewModel viewModel)
     {
         InitializeComponent();
-        BindingContext = new SettingsViewModel();
+        BindingContext = viewModel;
     }
 }

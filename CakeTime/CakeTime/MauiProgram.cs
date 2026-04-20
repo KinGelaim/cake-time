@@ -18,6 +18,8 @@ public static class MauiProgram
         builder.Services.AddTransient<MainViewModel>();
         builder.Services.AddSingleton<IEventRepository, EventRepository>();
         builder.Services.AddSingleton<EventService>();
+        builder.Services.AddSingleton<INotificationSettingsRepository, NotificationSettingsRepository>();
+        builder.Services.AddSingleton<NotificationSettingsService>();
 
 #if DEBUG
         builder.Logging.AddDebug();
